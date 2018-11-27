@@ -1,3 +1,5 @@
+package main;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.text.ParseException;
@@ -15,7 +17,7 @@ public class Parser {
             case LETTER:
                 return new Tree("Conc", Smth(), SpConc());
             default:
-                throw new ParseException("Unexpected symbol at pos", lexer.getPos());
+                throw new ParseException("Unexpected symbol at pos = " + (lexer.getPos() - 1), lexer.getPos());
         }
     }
 
@@ -25,7 +27,7 @@ public class Parser {
             case LETTER:
                 return new Tree("Smth", Content(), Closure());
             default:
-                throw new ParseException("Unexpected symbol at pos", lexer.getPos());
+                throw new ParseException("Unexpected symbol at pos = " + (lexer.getPos() - 1), lexer.getPos());
         }
     }
 
@@ -39,7 +41,7 @@ public class Parser {
             case END:
                 return new Tree("SpConc");
             default:
-                throw new ParseException("Unexpected symbol at pos", lexer.getPos());
+                throw new ParseException("Unexpected symbol at pos = " + (lexer.getPos() - 1), lexer.getPos());
         }
     }
 
@@ -49,7 +51,7 @@ public class Parser {
                 lexer.nextToken();
                 Tree in = Or();
                 if (lexer.getToken() != Token.RPAREN) {
-                    throw new ParseException("Closing Parenthesis expected at pos", lexer.getPos());
+                    throw new ParseException("Closing Parenthesis expected at pos" + (lexer.getPos() - 1), lexer.getPos());
                 }
                 lexer.nextToken();
                 return new Tree("Content", new Tree("("), in, new Tree(")"));
@@ -59,7 +61,7 @@ public class Parser {
                 lexer.nextToken();
                 return curNode;
             default:
-                throw new ParseException("Unexpected symbol at pos", lexer.getPos());
+                throw new ParseException("Unexpected symbol at pos = " + (lexer.getPos() - 1), lexer.getPos());
         }
     }
 
@@ -80,7 +82,7 @@ public class Parser {
             case LETTER:
                 return new Tree("ConcDash", Smth(), SpConc());
             default:
-                throw new ParseException("Unexpected symbol at pos", lexer.getPos());
+                throw new ParseException("Unexpected symbol at pos = " + (lexer.getPos() - 1), lexer.getPos());
         }
     }
 
@@ -90,7 +92,7 @@ public class Parser {
             case LETTER:
                 return new Tree("Or", Conc(), Sp());
             default:
-                throw new ParseException("Unexpected symbol at pos", lexer.getPos());
+                throw new ParseException("Unexpected symbol at pos = " + (lexer.getPos() - 1), lexer.getPos());
         }
     }
 
@@ -102,7 +104,7 @@ public class Parser {
             case END:
                 return new Tree("Sp");
             default:
-                throw new ParseException("Unexpected symbol at pos", lexer.getPos());
+                throw new ParseException("Unexpected symbol at pos = " + (lexer.getPos() - 1), lexer.getPos());
         }
     }
 
@@ -110,13 +112,13 @@ public class Parser {
         switch (lexer.getToken()) {
             case OR:
                 lexer.nextToken();
-                return new Tree("OrDash", Conc(), Sp());
+                return new Tree("OrDash", new Tree("|"), Conc(), Sp());
             default:
-                throw new ParseException("Unexpected symbol at pos", lexer.getPos());
+                throw new ParseException("Unexpected symbol at pos = " + (lexer.getPos() - 1), lexer.getPos());
         }
     }
 
-    Tree parse(String input) throws ParseException {
+    public Tree parse(String input) throws ParseException {
         return parse(new ByteArrayInputStream(input.getBytes()));
     }
 
