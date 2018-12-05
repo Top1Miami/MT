@@ -1,7 +1,7 @@
 // Generated from Tex2MathML.g4 by ANTLR 4.7.1
+
 package main.generatedParserLexer;
-
-
+import main.expression.*;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -19,13 +19,13 @@ public class Tex2MathMLBaseListener implements Tex2MathMLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStart(Tex2MathMLParser.StartContext ctx) { }
+	@Override public void enterBegin(Tex2MathMLParser.BeginContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStart(Tex2MathMLParser.StartContext ctx) { }
+	@Override public void exitBegin(Tex2MathMLParser.BeginContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -38,6 +38,18 @@ public class Tex2MathMLBaseListener implements Tex2MathMLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitPlus(Tex2MathMLParser.PlusContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMinus(Tex2MathMLParser.MinusContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMinus(Tex2MathMLParser.MinusContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -10,6 +10,6 @@ public class UnaryMinus extends Expression{
     }
     @Override
     public String toString() {
-        return "<mo>-</mo>" + expression.toString();
+        return "<mrow><mo>-</mo>" + expression.toString() + "</mrow>";
     }
 }

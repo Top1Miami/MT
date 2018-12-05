@@ -10,8 +10,12 @@ public class Pow extends Expression{
         this.expression = expression;
         this.power = power;
     }
+    public Pow (Expression expression, String number) {
+        this.expression = expression;
+        power = new MyNumber(number);
+    }
     @Override
     public String toString() {
-        return "<msup><mi>" + expression.toString() + "</mi><mn>" + power.toString() + "</mn></msup>";
+        return "<msup>" + expression.toString()  + power.toString() + "</msup>";
     }
 }

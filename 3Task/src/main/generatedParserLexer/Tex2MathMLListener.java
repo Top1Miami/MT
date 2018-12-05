@@ -1,7 +1,7 @@
 // Generated from Tex2MathML.g4 by ANTLR 4.7.1
+
 package main.generatedParserLexer;
-
-
+import main.expression.*;
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -11,15 +11,15 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface Tex2MathMLListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link Tex2MathMLParser#start}.
+	 * Enter a parse tree produced by {@link Tex2MathMLParser#begin}.
 	 * @param ctx the parse tree
 	 */
-	void enterStart(Tex2MathMLParser.StartContext ctx);
+	void enterBegin(Tex2MathMLParser.BeginContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Tex2MathMLParser#start}.
+	 * Exit a parse tree produced by {@link Tex2MathMLParser#begin}.
 	 * @param ctx the parse tree
 	 */
-	void exitStart(Tex2MathMLParser.StartContext ctx);
+	void exitBegin(Tex2MathMLParser.BeginContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Tex2MathMLParser#plus}.
 	 * @param ctx the parse tree
@@ -30,6 +30,16 @@ public interface Tex2MathMLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPlus(Tex2MathMLParser.PlusContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Tex2MathMLParser#minus}.
+	 * @param ctx the parse tree
+	 */
+	void enterMinus(Tex2MathMLParser.MinusContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Tex2MathMLParser#minus}.
+	 * @param ctx the parse tree
+	 */
+	void exitMinus(Tex2MathMLParser.MinusContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Tex2MathMLParser#mult}.
 	 * @param ctx the parse tree
