@@ -22,7 +22,7 @@ public class TestTree {
             Tree tree = parser.parse(testString);
             System.out.println("Failed");
         } catch (ParseException e) {
-            System.out.println("Passed");
+            System.out.println("Passed : " + e.getMessage());
         }
     }
     public static void main(String argv[]) throws ParseException{
@@ -41,6 +41,14 @@ public class TestTree {
         testTree.boxing("a*b*c*");
         //bordertest
         testTree.boxing("a|dd");
+        //plus
+        testTree.boxing("a+");
+        //multipleplus
+        testTree.boxing("a+(a+b)+");
+        //quest
+        testTree.boxing("a?");
+        //multiplequest
+        testTree.boxing("a?b?(a?c)?");
         //stresstest1
         testTree.boxing("(a|d)*sdddeqwe(a|d)*");
         //failtest1
@@ -51,6 +59,9 @@ public class TestTree {
         testTree.failBoxing("a|");
         //failtest4
         testTree.failBoxing("|a");
-
+        //failtest5
+        testTree.failBoxing("?");
+        //failtest6
+        testTree.failBoxing("+");
     }
 }

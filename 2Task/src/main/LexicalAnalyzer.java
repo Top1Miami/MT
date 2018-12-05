@@ -54,6 +54,14 @@ public class LexicalAnalyzer {
                 nextChar();
                 curToken = Token.CLOS;
                 break;
+            case '+':
+                nextChar();
+                curToken = Token.PLUS;
+                break;
+            case '?':
+                nextChar();
+                curToken = Token.QUEST;
+                break;
             case -1:
                 curToken = Token.END;
                 break;

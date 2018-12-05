@@ -56,7 +56,6 @@ public class Parser {
                 lexer.nextToken();
                 return new Tree("Content", new Tree("("), in, new Tree(")"));
             case LETTER:
-//                System.out.println(Character.toString((char)lexer.getCurChar()));
                 Tree curNode = new Tree("Content", new Tree(lexer.getPrevChar()));
                 lexer.nextToken();
                 return curNode;
@@ -71,6 +70,14 @@ public class Parser {
                 Tree curNode = new Tree("Closure", new Tree("*"));
                 lexer.nextToken();
                 return curNode;
+            case PLUS:
+                Tree curNodeP = new Tree("Closure", new Tree("+"));
+                lexer.nextToken();
+                return curNodeP;
+            case QUEST:
+                Tree curNodeQ = new Tree("Closure", new Tree("?"));
+                lexer.nextToken();
+                return curNodeQ;
             default:
                 return new Tree("Closure");
         }
