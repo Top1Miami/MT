@@ -1,0 +1,10 @@
+NonTerm=1
+Term=2
+Delim=3
+Arr=4
+WS=5
+Colon=6
+Regexp=7
+'|'=3
+'->'=4
+':'=6
