@@ -1,26 +1,32 @@
 package main.classes4gram;
 
+import main.gen.CreateLexer;
+import main.gen.CreateParser;
 import main.generatedLexerParser.Gram4GramLexer;
 import main.generatedLexerParser.Gram4GramParser;
-import main.generators.CreateToken;
+import main.gen.CreateToken;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Created by Dima on 16.12.2018.
  */
 public class Main {
-    public static void main(String[] argv) throws IOException{
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String test = reader.readLine();
-        Gram4GramLexer lexer = new Gram4GramLexer(CharStreams.fromString(test));
+    public static void main(String[] argv) throws IOException, GeneratedParserException {
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new FileReader("src\\main\\classes4gram\\test1.text"));
+        String test;
+        StringBuilder all = new StringBuilder();
+        while((test = reader.readLine()) != null) {
+            all.append(test);
+        }
+        System.out.println(all);
+        Gram4GramLexer lexer = new Gram4GramLexer(CharStreams.fromString(all.toString()));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         Gram4GramParser parser = new Gram4GramParser(tokens);
 //        String parsed = parser.begin().gram.toString();
@@ -33,8 +39,12 @@ public class Main {
         System.out.println("First");
         System.out.println(gram.first);
         System.out.println(gram.lexemList);
+//        System.out.println(gram.toString());
         CreateToken createToken = new CreateToken();
-
-        createToken.create("Sample", gram, "src\\test\\sample");
+        CreateLexer createLexer = new CreateLexer();
+        CreateParser createParser = new CreateParser();
+        createToken.create(gram, "test\\sample");
+        createLexer.create(gram, "test\\sample");
+        createParser.create(gram, "test\\sample");
     }
 }

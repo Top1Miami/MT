@@ -12,9 +12,14 @@ import java.util.HashSet;
 public class Grammar {
     public ArrayList<RuleSet> ruleList;
     public ArrayList<Lexem> lexemList;
-    String startNonTerm;
+    public String startNonTerm;
+    public ArrayList<String> impList;
     public Grammar(String start) {
         startNonTerm = start;
+    }
+    public Grammar(String start, ArrayList<String> impList) {
+        startNonTerm = start;
+        this.impList = impList;
     }
     public void setRules(ArrayList<RuleSet> rl) {
         ruleList = rl;
@@ -22,10 +27,19 @@ public class Grammar {
     public void setLexems(ArrayList<Lexem> ll) {
         lexemList = ll;
     }
+    public HashMap<Rule, HashSet<String>> getFirstByRule = new HashMap<>();
     public void build() {
         createNonTermList();
         buildFirst();
         buildFollow();
+    }
+    public RuleSet nextRuleSet(String name) throws GeneratedParserException {
+        for(RuleSet ruleSet : ruleList) {
+            if(ruleSet.name.equals(name)) {
+                return ruleSet;
+            }
+        }
+        throw new GeneratedParserException();
     }
 
     @Override
@@ -42,8 +56,8 @@ public class Grammar {
         return sb.toString();
     }
 
-    HashMap<String, HashSet<String>> first = new HashMap<>();
-    HashMap<String, HashSet<String>> follow = new HashMap<>();
+    public HashMap<String, HashSet<String>> first = new HashMap<>();
+    public HashMap<String, HashSet<String>> follow = new HashMap<>();
 
 //    ArrayList<Pair<String, Rule>> termList = new ArrayList<>();
     ArrayList<Pair<String, Rule>> nonTermList = new ArrayList<>();
@@ -64,39 +78,49 @@ public class Grammar {
             for (int i = 0; i < nonTermList.size(); i++) {
                 String name = nonTermList.get(i).getKey();
                 Rule rule = nonTermList.get(i).getValue();
+                HashSet<String> helpMEPLZ;
                 HashSet<String> temp;
                 if (first.containsKey(name)) {
                     temp = first.remove(name);
                 } else {
                     temp = new HashSet<>();
                 }
+                if (getFirstByRule.containsKey(rule)) {
+                    helpMEPLZ = getFirstByRule.remove(rule);
+                } else {
+                    helpMEPLZ = new HashSet<>();
+                }
 //                System.out.println(name + " -> " + rule);
-                String firstInRule = rule.lit.get(0);
+                String firstInRule = rule.lit.get(0).name;
 //                System.out.println(firstInRule);
                 if ((checkTerm(firstInRule)) || firstInRule.equals("EPS")) {
                     if (temp.add(firstInRule)) {
                         changed = true;
                     }
+                    helpMEPLZ.add(firstInRule);
                 } else {
                     if (first.containsKey(firstInRule)) {
                         if (temp.addAll(first.get(firstInRule))) {
                             changed = true;
                         }
+                        helpMEPLZ.addAll(first.get(firstInRule));
                         for (int j = 0; j < rule.lit.size() - 1; j++) {
-                            String nextInRule = rule.lit.get(j);
+                            String nextInRule = rule.lit.get(j).name;
                             if (first.containsKey(nextInRule)) {
                                 if (first.get(nextInRule).contains("EPS")) {
-                                    String nextNext = rule.lit.get(j + 1);
+                                    String nextNext = rule.lit.get(j + 1).name;
                                     if (first.containsKey(nextNext)) {
                                         if (temp.addAll(first.get(nextNext))) {
                                             changed = true;
                                         }
+                                        helpMEPLZ.addAll(first.get(nextNext));
                                     }
                                 }
                             }
                         }
                     }
                 }
+                getFirstByRule.put(rule, helpMEPLZ);
                 first.put(name, temp);
             }
         }
@@ -104,7 +128,7 @@ public class Grammar {
 
     private void buildFollow() {
         HashSet<String> template = new HashSet<>();
-        template.add("$");
+        template.add("END");
         follow.put(startNonTerm, template);
         boolean changed = true;
         while(changed) {
@@ -114,7 +138,7 @@ public class Grammar {
                 Rule rule = nonTermList.get(i).getValue();
                 for(int j = 0; j < rule.lit.size() - 1;j++) {
                     HashSet<String> temp;
-                    String curNode = rule.lit.get(j);
+                    String curNode = rule.lit.get(j).name;
 //                    System.out.println(curNode);
                     if(checkTerm(curNode) || curNode.equals("EPS")) continue;
                     if(follow.containsKey(curNode)) {
@@ -122,7 +146,7 @@ public class Grammar {
                     } else {
                         temp = new HashSet<>();
                     }
-                    String nextNode = rule.lit.get(j + 1);
+                    String nextNode = rule.lit.get(j + 1).name;
                     boolean hasEps = false;
                     if(checkTerm(nextNode)) {
                         if(temp.add(nextNode)) {
@@ -139,7 +163,7 @@ public class Grammar {
                     }
                     if(hasEps) {
                         for(int k = j + 1;k < rule.lit.size();k++) {
-                            String nextNext = rule.lit.get(k);
+                            String nextNext = rule.lit.get(k).name;
                             if(checkTerm(nextNext) || !first.get(nextNext).contains("EPS")) {
                                 hasEps = false;
                             }
@@ -157,7 +181,7 @@ public class Grammar {
 //                    System.out.println(follow);
                 }
                 HashSet<String> temp;
-                String curNode = rule.lit.get(rule.lit.size() - 1);
+                String curNode = rule.lit.get(rule.lit.size() - 1).name;
                 //System.out.println(curNode);
                 if(checkTerm(curNode) || curNode.equals("EPS")) continue;
                 if(follow.containsKey(curNode)) {
@@ -175,7 +199,7 @@ public class Grammar {
         }
     }
 
-    private boolean checkTerm(String input) {
+    public boolean checkTerm(String input) {
         return (input.charAt(0) >= 'A' && input.charAt(0) <= 'Z');
     }
 }

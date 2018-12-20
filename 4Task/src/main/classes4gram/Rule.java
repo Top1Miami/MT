@@ -6,16 +6,27 @@ import java.util.ArrayList;
  * Created by Dima on 16.12.2018.
  */
 public class Rule {
-    ArrayList<String> lit;
+    public ArrayList<Literal> lit;
     boolean epsilon = false;
-    public Rule(ArrayList<String> lit) {
+    public String code;
+    public Rule(ArrayList<Literal> lit) {
         this.lit = lit;
     }
 
     public Rule() {
         epsilon = true;
         lit = new ArrayList<>();
-        lit.add("EPS");
+        lit.add(new Literal("EPS", false, null));
+    }
+
+    public Rule(String code) {
+        this.code = code;
+        epsilon = true;
+        lit = new ArrayList<>();
+        lit.add(new Literal("EPS", false, null));
+    }
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Override

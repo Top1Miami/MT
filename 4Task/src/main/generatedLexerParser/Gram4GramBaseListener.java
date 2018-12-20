@@ -31,6 +31,18 @@ public class Gram4GramBaseListener implements Gram4GramListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterImportsList(Gram4GramParser.ImportsListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitImportsList(Gram4GramParser.ImportsListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterLexerParser(Gram4GramParser.LexerParserContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -91,6 +103,30 @@ public class Gram4GramBaseListener implements Gram4GramListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterGetArg(Gram4GramParser.GetArgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGetArg(Gram4GramParser.GetArgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterGetType(Gram4GramParser.GetTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGetType(Gram4GramParser.GetTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSubRuleSet(Gram4GramParser.SubRuleSetContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -122,6 +158,18 @@ public class Gram4GramBaseListener implements Gram4GramListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNonTerm(Gram4GramParser.NonTermContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPar(Gram4GramParser.ParContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPar(Gram4GramParser.ParContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

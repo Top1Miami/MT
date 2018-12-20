@@ -1,1 +1,4 @@
-x x -> y e y -> E | e -> C E : <a> C : <b>
+x x [Expression expr] _returns[Expr ep] -> y e y _returns [Expression expr] -> E | e [Expression expr] -> C E : <a> C : <b>
+x x [Expression expr] -> A A : <a>
+x x [Expression expr] _returns[Expr ep] -> y e {kal} y _returns [Expression expr] -> E {kae}|{f} e [Expression expr] -> C {kokok}E : <a> C : <b>
+or conc -> smth spConc spConc -> concE | concE -> smth spConc smth -> content closure closure -> S | content -> LP or RP | A or -> conc sp sp -> orE | orE -> I conc sp A : <[a-z]> I : <|> S : <*> LP : <(> RP : <)>

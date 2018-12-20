@@ -21,6 +21,16 @@ public interface Gram4GramListener extends ParseTreeListener {
 	 */
 	void exitBegin(Gram4GramParser.BeginContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Gram4GramParser#importsList}.
+	 * @param ctx the parse tree
+	 */
+	void enterImportsList(Gram4GramParser.ImportsListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Gram4GramParser#importsList}.
+	 * @param ctx the parse tree
+	 */
+	void exitImportsList(Gram4GramParser.ImportsListContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link Gram4GramParser#lexerParser}.
 	 * @param ctx the parse tree
 	 */
@@ -71,6 +81,26 @@ public interface Gram4GramListener extends ParseTreeListener {
 	 */
 	void exitRuleSet(Gram4GramParser.RuleSetContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Gram4GramParser#getArg}.
+	 * @param ctx the parse tree
+	 */
+	void enterGetArg(Gram4GramParser.GetArgContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Gram4GramParser#getArg}.
+	 * @param ctx the parse tree
+	 */
+	void exitGetArg(Gram4GramParser.GetArgContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Gram4GramParser#getType}.
+	 * @param ctx the parse tree
+	 */
+	void enterGetType(Gram4GramParser.GetTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Gram4GramParser#getType}.
+	 * @param ctx the parse tree
+	 */
+	void exitGetType(Gram4GramParser.GetTypeContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link Gram4GramParser#subRuleSet}.
 	 * @param ctx the parse tree
 	 */
@@ -100,6 +130,16 @@ public interface Gram4GramListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNonTerm(Gram4GramParser.NonTermContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Gram4GramParser#par}.
+	 * @param ctx the parse tree
+	 */
+	void enterPar(Gram4GramParser.ParContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Gram4GramParser#par}.
+	 * @param ctx the parse tree
+	 */
+	void exitPar(Gram4GramParser.ParContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Gram4GramParser#term}.
 	 * @param ctx the parse tree

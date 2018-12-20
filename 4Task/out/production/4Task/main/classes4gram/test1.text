@@ -1,0 +1,15 @@
+_import <test4task2.*> or,
+conc _returns[Tree v] -> smth spConc {v = new Tree("Conc", smth, spConc);}
+spConc _returns[Tree v] -> concE {v = new Tree("SpConc", concE);} | {v = new Tree("SpConc");}
+concE _returns[Tree v] -> smth spConc {v = new Tree("Or", smth, spConc);}
+smth _returns[Tree v] -> content closure {v = new Tree("Smth", content, closure);}
+closure _returns[Tree v] -> S {v = new Tree("Closure", new Tree("*"));} | {v = new Tree("Closure");}
+content _returns[Tree v] -> LP or RP {v = new Tree("Content", new Tree("("), or, new Tree(")"));}| A {v = new Tree("Content", new Tree(A));}
+or _returns[Tree v] -> conc sp {v = new Tree("Or", conc, sp);}
+sp _returns[Tree v] -> orE {v = new Tree("Sp", orE);} | {v = new Tree("Sp");}
+orE _returns[Tree v] -> I conc sp {v = new Tree("OrE", new Tree("|"), conc, sp);}
+A : <[a-z]>
+I : <|>
+S : <*>
+LP : <(>
+RP : <)>
